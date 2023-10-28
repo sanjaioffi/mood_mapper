@@ -7,6 +7,7 @@ import 'package:mood_tracker/main_screen.dart';
 import 'package:mood_tracker/screens/home/linechart.dart';
 import 'package:mood_tracker/screens/home/stt.dart';
 import 'package:mood_tracker/screens/onboarding/onboarding_page.dart';
+import 'package:mood_tracker/screens/onboarding/signup_page.dart';
 import 'package:mood_tracker/stt_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 

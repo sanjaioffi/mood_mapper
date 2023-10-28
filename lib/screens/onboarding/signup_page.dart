@@ -124,42 +124,39 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Expanded(
-                      flex: 1,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          bool documentExists = await isDocumentExists(
-                              'users', phoneController.text.toString().trim());
-                          if (documentExists) {
-                            Get.snackbar("Error", "Phone number already exists",
-                                snackPosition: SnackPosition.TOP,
-                                backgroundColor: Colors.red.shade800,
-                                colorText: Colors.white);
-                            showMobileRegisteredDialog(context);
-                          } else {
-                            setState(() {
-                              loading = true;
-                            });
-                            showLoadingDialog(
-                                context, 'Sending OTP to your phone number');
-                            // Simulate a time-consuming task
-                            await Future.delayed(Duration(seconds: 2));
+                  Expanded(
+                    flex: 1,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        bool documentExists = await isDocumentExists(
+                            'users', phoneController.text.toString().trim());
+                        if (documentExists) {
+                          Get.snackbar("Error", "Phone number already exists",
+                              snackPosition: SnackPosition.TOP,
+                              backgroundColor: Colors.red.shade800,
+                              colorText: Colors.white);
+                          showMobileRegisteredDialog(context);
+                        } else {
+                          setState(() {
+                            loading = true;
+                          });
+                          showLoadingDialog(
+                              context, 'Sending OTP to your phone number');
+                          // Simulate a time-consuming task
+                          await Future.delayed(Duration(seconds: 2));
 
-                            // Close the dialog when the task is done
-                            Navigator.of(context).pop();
-                            _signInWithMobileNumber();
-                          }
-                        },
-                        child: Text(
-                          'Send OTP',
-                          style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.bold),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColor.teaGreen),
+                          // Close the dialog when the task is done
+                          Navigator.of(context).pop();
+                          _signInWithMobileNumber();
+                        }
+                      },
+                      child: Text(
+                        'Send OTP',
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
                       ),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColor.teaGreen),
                     ),
                   ),
                 ],

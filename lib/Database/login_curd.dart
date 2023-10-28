@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mood_tracker/getx/user_controller.dart';
+import 'package:mood_tracker/main_screen.dart';
 import 'package:mood_tracker/screens/home/stt.dart';
 import 'package:mood_tracker/stt_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,7 +38,7 @@ Future<void> verifyPassword(String userId, String password) async {
         prefs.setString('uid', userId);
         Get.find<UidController>().setUid(userId);
         Get.find<UserController>().fetchUserData(userId);
-        Get.to(() => sttPage());
+        Get.offAll(() => MainScreen());
       }
     } else {
       // User document not found

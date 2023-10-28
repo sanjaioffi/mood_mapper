@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:mood_tracker/app_colors.dart';
 import 'package:mood_tracker/getx/user_controller.dart';
+import 'package:mood_tracker/screens/onboarding/onboarding_page.dart';
 import 'package:random_avatar/random_avatar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // show online users to get quick response for emeregeency
 
@@ -24,18 +27,6 @@ class _ProfilePageState extends State<ProfilePage> {
     int Badges = 5; // Replace with actual following count
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        // leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
-        title: Text(
-          'User Profile',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            letterSpacing: 1,
-          ),
-        ),
-      ),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         stream:
             getUserDetailsStream(Get.find<UserController>().user.value!.uid),
@@ -65,6 +56,21 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(() => OnboardingPage());
+                              SharedPreferences.getInstance().then((prefs) {
+                                prefs.remove('uid');
+                              });
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [Icon(Icons.logout), Text('Logout')],
+                            ),
+                          ),
+                        ),
                         Align(
                           alignment: Alignment.center,
                           child: RandomAvatar(
@@ -132,6 +138,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
                         HeatMap(
                           datasets: {
+                            DateTime(2023, 8, 7): 17,
+                            DateTime(2023, 8, 8): 1,
+                            DateTime(2023, 8, 9): 13,
+                            DateTime(2023, 8, 13): 16,
+                            DateTime(2023, 9, 7): 7,
+                            DateTime(2023, 9, 8): 10,
+                            DateTime(2023, 9, 9): 13,
+                            DateTime(2023, 9, 13): 6,
                             DateTime(2023, 10, 6): 3,
                             DateTime(2023, 10, 7): 7,
                             DateTime(2023, 10, 8): 10,

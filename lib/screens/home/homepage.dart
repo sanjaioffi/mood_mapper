@@ -93,6 +93,14 @@ class _HomePageState extends State<HomePage> {
               ),
               HeatMap(
                 datasets: {
+                  DateTime(2023, 8, 7): 17,
+                  DateTime(2023, 8, 8): 1,
+                  DateTime(2023, 8, 9): 13,
+                  DateTime(2023, 8, 13): 16,
+                  DateTime(2023, 9, 7): 7,
+                  DateTime(2023, 9, 8): 10,
+                  DateTime(2023, 9, 9): 13,
+                  DateTime(2023, 9, 13): 6,
                   DateTime(2023, 10, 6): 3,
                   DateTime(2023, 10, 7): 7,
                   DateTime(2023, 10, 8): 10,

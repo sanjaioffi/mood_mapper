@@ -62,7 +62,7 @@ class MoodScreen extends StatelessWidget {
       mood = 'Neutral';
     }
     print(mood);
-    MoodEntryService().addMoodEntry( Get.find<UserController>().user.value!.uid,
+    MoodEntryService().addMoodEntry(Get.find<UserController>().user.value!.uid,
         MoodEntry(text: enteredText, analyzedMood: mood, date: DateTime.now()));
 
     final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -133,13 +133,16 @@ class MoodScreen extends StatelessWidget {
             future: mood,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator(); // Display a loading indicator while waiting for the result.
+                return Center(
+                      child: Lottie.asset('assets/images/mood-loading.json'),
+                    ); // Display a loading indicator while waiting for the result.
               } else if (snapshot.hasError) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Error: ${snapshot.error}'),
-                    Text('Please try again.'),
+                    Text(
+                        'Please try again.If you are facing this error again and again \nPlease try again atleast 5 times because we used a trail version to deploy our models'),
                     Center(
                       child: Lottie.asset('assets/images/error.json'),
                     ),
